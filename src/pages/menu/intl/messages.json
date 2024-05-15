@@ -1,0 +1,18 @@
+{
+  "btn.delete.item": "Delete",
+  "btn.applyFilter": "Filter",
+  "field.minPrice": "Min price",
+  "field.maxPrice": "Max price",
+  "field.category": "Category",
+  "field.weight": "Weight",
+  "field.calories": "Calories",
+  "field.price": "Price",
+  "btn.confirm": "Confirm",
+  "btn.cancel": "Cancel",
+  "dlg.text": "Delete the dish",
+  "dlg.warn.text": "Are you sure that you want to delete the dish?",
+  "txt.category.all": "All",
+  "msg.item.create": "Create dish",
+  "msg.deleteSuccess": "Dish deleted successfully",
+  "msg.deleteFail": "Dish deleted with failure"
+}

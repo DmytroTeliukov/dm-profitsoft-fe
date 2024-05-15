@@ -1,0 +1,21 @@
+{
+  "field.name": "Назва",
+  "field.description": "Опис",
+  "field.price": "Ціна",
+  "field.weight": "Вага",
+  "field.calories": "Калорії",
+  "field.category": "Категорія",
+  "field.ingredients": "Інгредієнти",
+  "field.cuisines": "Кухня",
+  "field.dietarySpecifics": "Дієтичні особливості",
+  "action.save": "Зберегти",
+  "action.cancel": "Відмінити",
+  "msg.updateSuccess": "Страва була оновлена успішно",
+  "msg.updateFail": "Страва була оновлена з помилкою",
+  "msg.createSuccess": "Страва була створена успішно",
+  "msg.createFail": "Страва була створена з помилкою",
+  "error.required": "Помилка: Обов'язкое поле",
+  "error.invalidPrice": "Помилка: невалідне значення ціни",
+  "error.invalidWeight": "Помилка: невалідне значення ваги",
+  "error.invalidCalories": "Помилка: невалидне значення калорії"
+}

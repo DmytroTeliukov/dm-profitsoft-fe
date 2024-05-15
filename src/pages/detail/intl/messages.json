@@ -1,0 +1,21 @@
+{
+  "field.name": "Name",
+  "field.description": "Description",
+  "field.price": "Price",
+  "field.weight": "Weight",
+  "field.calories": "Calories",
+  "field.category": "Category",
+  "field.ingredients": "Ingredients",
+  "field.cuisines": "Cuisines",
+  "field.dietarySpecifics": "Dietary specifics",
+  "action.save": "Save",
+  "action.cancel": "Cancel",
+  "msg.updateSuccess": "Dish was updated successfully",
+  "msg.updateFail": "Dish was updated with failure",
+  "msg.createSuccess": "Dish was created successfully",
+  "msg.createFail": "Dish was created with failure",
+  "error.required": "Error: required field",
+  "error.invalidPrice": "Error: invalid value of price",
+  "error.invalidWeight": "Error: invalid value of weight",
+  "error.invalidCalories": "Error: invalid value of calories"
+}

@@ -1,0 +1,18 @@
+{
+  "btn.delete.item": "Видалили",
+  "btn.applyFilter": "Фільтрувати",
+  "field.minPrice": "Мінімальна ціна",
+  "field.maxPrice": "Максимальна ціна",
+  "field.category": "Категорія",
+  "field.weight": "Вага",
+  "field.calories": "Калорії",
+  "field.price": "Ціна",
+  "btn.confirm": "Підтвердити",
+  "btn.cancel": "Скасувати",
+  "dlg.text": "Видалити страву",
+  "dlg.warn.text": "Ви впевнені, що хочете видалити цю страву?",
+  "txt.category.all": "Усі",
+  "msg.item.create": "Створити страву",
+  "msg.deleteSuccess": "Страва видалена успішно",
+  "msg.deleteFail": "Страва видалена с помилкою"
+}
