@@ -103,7 +103,6 @@ function Header({
     isUserMenuOpened: false,
   });
 
-  const userName = user.firstName || user.login;
 
   const actualOrderedRightPanelItemTypes = useMemo(() => {
     const result = [];
@@ -167,14 +166,7 @@ function Header({
                           noWrap
                           variant="subtitle"
                         >
-                          {!isMobile
-                            ? (
-                              <strong>
-                                {userName}
-                              </strong>
-                            )
-                            : userName
-                          }
+
                         </Typography>
                       </div>
                     </div>

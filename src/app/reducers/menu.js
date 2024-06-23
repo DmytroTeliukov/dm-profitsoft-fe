@@ -1,16 +1,10 @@
 import {
     ERROR_DELETE_DISH,
-    ERROR_FETCH_DISHES,
     ERROR_CREATE_DISH,
-    ERROR_FETCH_DISH,
     ERROR_UPDATE_DISH,
     RECEIVE_DISHES,
     RECEIVE_DISH,
-    REQUEST_DELETE_DISH,
     REQUEST_FETCH_DISHES,
-    REQUEST_CREATE_DISH,
-    REQUEST_FETCH_DISH,
-    REQUEST_UPDATE_DISH,
     SUCCESS_DELETE_DISH,
     SUCCESS_CREATE_DISH,
     SUCCESS_UPDATE_DISH,
@@ -100,12 +94,9 @@ export default function Reducer(state = initialState, action) {
         }
 
         case SUCCESS_UPDATE_DISH: {
-            const {dish} = action.payload
-
+            console.log("Success reducer")
             return {
                 ...state,
-                dish: dish,
-                messageErrors: initialState.messageErrors,
                 isFailedUpdatingDish: false,
             }
         }

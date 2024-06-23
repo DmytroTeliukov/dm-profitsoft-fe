@@ -24,6 +24,7 @@ import UserProvider from 'misc/providers/UserProvider';
 
 import actionsUser from '../actions/user';
 import actionsMenu from '../actions/menu';
+import actionsCategory from '../actions/category';
 import Header from '../components/Header';
 import IntlProvider from '../components/IntlProvider';
 import MissedPage from '../components/MissedPage';
@@ -49,6 +50,7 @@ function App() {
             onSignOut: () => dispatch(actionsUser.fetchSignOut()),
         });
         dispatch(actionsUser.fetchUser());
+        dispatch(actionsCategory.fetchCategoriesData())
         setState({
             ...state,
             componentDidMount: true,
@@ -79,8 +81,9 @@ function App() {
                                             path={`${pageURLs[pages.defaultPage]}`}
                                         />
                                         <Route
-                                            element={<SecretPage/>}
-                                            path={`${pageURLs[pages.secretPage]}`}
+                                            element={<SecretPage onFetchProfile={() => dispatch(actionsUser.fetchUser())}
+                                            />}
+                                            path={`${pageURLs[pages.profilePage]}`}
                                         />
                                         <Route
                                             element={<DishDetailPage
@@ -108,6 +111,7 @@ function App() {
                                                         dietarySpecifics: dietarySpecifics,
                                                         cuisines: cuisines
                                                     }))}
+                                                onFetchCategories={() => dispatch(actionsCategory.fetchCategoriesData())}
                                                 onUpdateDish={(dishId, dishData) => dispatch(actionsMenu.updateDishData(dishId, dishData))}
                                             />}
                                             path={`${pageURLs[pages.menuDetailPage]}`}
@@ -128,6 +132,7 @@ function App() {
                                                 onDeleteDish={(dishId) => dispatch(actionsMenu.deleteDishById(
                                                     dishId
                                                 ))}
+                                                onFetchCategories={() => dispatch(actionsCategory.fetchCategoriesData())}
                                             />
                                             }
                                             path={`${pageURLs[pages.menuPage]}`}
@@ -140,15 +145,7 @@ function App() {
                                                     isFailedSignUp={isFailedSignUp}
                                                     isFetchingSignIn={isFetchingSignIn}
                                                     isFetchingSignUp={isFetchingSignUp}
-                                                    onSignIn={({
-                                                                   email,
-                                                                   login,
-                                                                   password,
-                                                               }) => dispatch(actionsUser.fetchSignIn({
-                                                        email,
-                                                        login,
-                                                        password,
-                                                    }))}
+                                                    onSignIn={() => dispatch(actionsUser.fetchSignIn())}
                                                     onSignUp={({
                                                                    email,
                                                                    firstName,

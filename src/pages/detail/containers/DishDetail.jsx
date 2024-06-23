@@ -15,7 +15,8 @@ import {
 } from "@mui/material";
 import {useIntl} from "react-intl";
 import {ArrowBack, Edit} from "@mui/icons-material";
-import {mockCategories, mockCuisines, mockDietarySpecifics, mockIngredients} from "../../../app/constants/mockdata";
+import {mockIngredients, mockCuisines, mockDietarySpecifics} from "../../../app/constants/mockdata"
+import Cookies from "js-cookie";
 
 const defaultDishValue = {
     name: '',
@@ -29,7 +30,8 @@ const defaultDishValue = {
     dietarySpecifics: []
 }
 
-const DishDetail = ({backPagePath, onFetchDishData, onCreateDish, onUpdateDish}) => {
+const DishDetail = ({backPagePath, onFetchDishData, onCreateDish,
+                        onFetchCategories, onUpdateDish}) => {
     const {formatMessage} = useIntl();
     const {id} = useParams();
     const navigate = useNavigate();
@@ -40,14 +42,21 @@ const DishDetail = ({backPagePath, onFetchDishData, onCreateDish, onUpdateDish})
     const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
     const [errors, setErrors] = useState({});
+    const {categories} = useSelector(state => state.category);
 
 
     useEffect(() => {
-        if (Number(id)) {
-            getDish(id)
+        const sessionId = Cookies.get("SESSION-ID");
+        console.log(sessionId);
+        if (!sessionId) {
+            navigator("/login");
         } else {
-            setEditMode(true);
-            setLocalDish(defaultDishValue);
+            if (Number(id)) {
+                getDish(id)
+            } else {
+                setEditMode(true);
+                setLocalDish(defaultDishValue);
+            }
         }
     }, []);
 
@@ -87,7 +96,6 @@ const DishDetail = ({backPagePath, onFetchDishData, onCreateDish, onUpdateDish})
                     id: Number(id),
                     name: localDish.name,
                     description: localDish.description,
-                    categoryId: localDish.category.id,
                     weight: localDish.weight,
                     calories: localDish.calories,
                     price: localDish.price,
@@ -102,11 +110,12 @@ const DishDetail = ({backPagePath, onFetchDishData, onCreateDish, onUpdateDish})
                         setEditMode(false);
 
                         setLocalDish(defaultDishValue);
-
+                        console.log("Update success");
                     })
                     .catch(() => {
                         setSnackbarMessage(formatMessage({id: 'msg.updateFail'}));
                         setIsSnackbarOpen(true);
+                        console.log("Update fail")
                     });
             } else {
                 onCreateDish({
@@ -236,7 +245,7 @@ const DishDetail = ({backPagePath, onFetchDishData, onCreateDish, onUpdateDish})
                         helperText={errors.calories}
                         fullWidth
                     />
-                    <FormControl fullWidth>
+                    {!Number(id) && (<FormControl fullWidth>
                         <InputLabel>{formatMessage({id: 'field.category'})}</InputLabel>
                         <Select
                             name="category"
@@ -244,16 +253,16 @@ const DishDetail = ({backPagePath, onFetchDishData, onCreateDish, onUpdateDish})
                             onChange={(e) => handleFieldChange({
                                 target: {
                                     name: 'category',
-                                    value: mockCategories.find(cat => cat.id === e.target.value)
+                                    value: categories.find(cat => cat.id === e.target.value)
                                 }
                             })}
                             error={!!errors.category}
                         >
-                            {mockCategories.map(category => (
+                            {categories.map(category => (
                                 <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
                             ))}
                         </Select>
-                    </FormControl>
+                    </FormControl>)}
                     <FormControl fullWidth>
                         <InputLabel>{formatMessage({id: 'field.ingredients'})}</InputLabel>
                         <Select

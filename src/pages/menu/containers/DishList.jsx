@@ -23,7 +23,6 @@ import {Link, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {useSelector} from "react-redux";
-import {mockCategories} from "../../../app/constants/mockdata";
 
 // Default filter values
 const defaultFilters = {
@@ -36,7 +35,7 @@ const defaultFilters = {
 const pageSize = 2;
 
 // DishList component
-function DishList({ menuPagePath, onFetchDishes, onDeleteDish }) {
+function DishList({ menuPagePath, onFetchDishes, onFetchCategories, onDeleteDish }) {
     const { formatMessage } = useIntl();
     const [currentPage, setCurrentPage] = useState(() => {
         // Retrieve current page from localStorage or default to 1
@@ -56,12 +55,15 @@ function DishList({ menuPagePath, onFetchDishes, onDeleteDish }) {
     // Redux state
     const { dishes, totalPages } = useSelector(state => state.menu);
 
+    const {categories} = useSelector(state => state.category);
     const [isDishesFetched, setIsDishesFetched] = useState(false);
     const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
+
     useEffect(() => {
         setIsDishesFetched(false); // Reset fetch flag on component mount
+
     }, []);
 
     // Save filter and pagination settings to localStorage on any changes
@@ -78,6 +80,8 @@ function DishList({ menuPagePath, onFetchDishes, onDeleteDish }) {
         }
     }, [filter, currentPage, isDishesFetched, dishes]);
 
+
+
     const handleMouseEnter = (dishId) => {
         setChosenItemId(dishId);
         setIsShownDeleteBtn(true);
@@ -93,6 +97,7 @@ function DishList({ menuPagePath, onFetchDishes, onDeleteDish }) {
             .then(() => {
                 setSnackbarMessage(formatMessage({ id: 'msg.deleteSuccess' }));
                 setIsSnackbarOpen(true);
+                setIsDishesFetched(false)
             })
             .catch(() => {
                 setSnackbarMessage(formatMessage({ id: 'msg.deleteFail' }));
@@ -141,8 +146,8 @@ function DishList({ menuPagePath, onFetchDishes, onDeleteDish }) {
                         onChange={handleFilterChange}
                         name="categoryId"
                     >
-                        <MenuItem key={0} value={0}>{formatMessage({id: 'txt.category.all'})}</MenuItem>
-                        {mockCategories.map(category => (
+
+                        {categories.map(category => (
                             <MenuItem key={category.id} value={category.id}>{category.name}</MenuItem>
                         ))}
                     </Select>
