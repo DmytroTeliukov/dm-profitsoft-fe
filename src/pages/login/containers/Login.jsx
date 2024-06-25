@@ -2,8 +2,6 @@ import { createUseStyles } from 'react-jss';
 import { useIntl } from 'react-intl';
 import useTheme from 'misc/hooks/useTheme';
 import Button from 'components/Button';
-import md5 from 'md5';
-import React, { useEffect, useState } from 'react';
 import Typography from 'components/Typography';
 
 const getClasses = createUseStyles((theme) => ({
@@ -31,44 +29,12 @@ const getClasses = createUseStyles((theme) => ({
 }));
 
 function Login({
-  isAutoSignInAfterSignUp = true,
-  isFailedSignUp,
   isFetchingSignIn,
-  isFetchingSignUp,
   onSignIn,
 }) {
   const { formatMessage } = useIntl();
   const { theme } = useTheme();
   const classes = getClasses({ theme });
-  const [state, setState] = useState({
-    emailOrLogin: '',
-    externalErrors: [],
-    password: '',
-    isShowPassword: false,
-    isSignUpDialogOpened: false,
-    signInValidationErrors: [],
-    signUpEmail: '',
-    signUpFirstName: '',
-    signUpLastName: '',
-    signUpLogin: '',
-    signUpPassword: '',
-    signUpPasswordConfirm: '',
-    signUpValidationErrors: [],
-  });
-
-  const onCancelSignUp = () => setState({
-    ...state,
-    externalErrors: [],
-    signUpEmail: '',
-    signUpFirstName: '',
-    signUpLastName: '',
-    signUpLogin: '',
-    signUpPassword: '',
-    signUpPasswordConfirm: '',
-    signUpValidationErrors: [],
-    isSignUpDialogOpened: false,
-  });
-
 
   return (
     <div className={classes.container}>
@@ -77,7 +43,7 @@ function Login({
           <Button
             isLoading={isFetchingSignIn}
             onClick={() =>
-              window.location.href = `http://localhost:2035/oauth/authenticate`
+              onSignIn()
             }
             variant="primary"
           >
