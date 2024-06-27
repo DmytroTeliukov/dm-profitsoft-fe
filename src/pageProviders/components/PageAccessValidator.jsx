@@ -33,7 +33,8 @@ function PageAccessValidator({
   );
 
   useEffect(() => {
-    if (!isFetchingUser && !isFetchingSignIn) {
+
+
       if (!isAuthorized) {
         changePage({
           locationSearch: {
@@ -46,17 +47,13 @@ function PageAccessValidator({
           pathname: `${pagesURLs[pages.login]}`,
           replace: true,
         });
-      } else if (!hasAccess) {
-        changePage({
-          pathname: `${pagesURLs[pages.defaultPage]}`,
-        });
       } else {
         setState(prevState => ({
           ...prevState,
           isValid: true,
         }));
       }
-    }
+
   }, [isFetchingUser, isAuthorized, hasAccess]);
 
   return (

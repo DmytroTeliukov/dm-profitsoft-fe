@@ -7,7 +7,7 @@ import {
     REQUEST_FETCH_DISHES,
     SUCCESS_DELETE_DISH,
     SUCCESS_CREATE_DISH,
-    SUCCESS_UPDATE_DISH,
+    SUCCESS_UPDATE_DISH, REQUEST_FETCH_DISH,
 } from "../constants/actionTypes"
 
 
@@ -44,6 +44,14 @@ const convertErrors = errors => errors.map(error => ({
 
 export default function Reducer(state = initialState, action) {
     switch (action.type) {
+
+        case REQUEST_FETCH_DISH: {
+            return {
+                ...state,
+                dish: initialState.dish,
+            }
+        }
+
         case ERROR_DELETE_DISH: {
             return {
                 ...state,

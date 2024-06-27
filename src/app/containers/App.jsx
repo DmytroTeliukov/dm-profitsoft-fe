@@ -146,19 +146,6 @@ function App() {
                                                     isFetchingSignIn={isFetchingSignIn}
                                                     isFetchingSignUp={isFetchingSignUp}
                                                     onSignIn={() => dispatch(actionsUser.fetchSignIn())}
-                                                    onSignUp={({
-                                                                   email,
-                                                                   firstName,
-                                                                   lastName,
-                                                                   login,
-                                                                   password,
-                                                               }) => dispatch(actionsUser.fetchSignUp({
-                                                        email,
-                                                        firstName,
-                                                        lastName,
-                                                        login,
-                                                        password,
-                                                    }))}
                                                 />
                                             )}
                                             path={`${pageURLs[pages.login]}`}
@@ -166,7 +153,7 @@ function App() {
                                         <Route
                                             element={(
                                                 <MissedPage
-                                                    redirectPage={`${pageURLs[pages.defaultPage]}`}
+                                                    redirectPage={`${pageURLs[pages.menuPage]}`}
                                                 />
                                             )}
                                             path="*"

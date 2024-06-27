@@ -16,7 +16,6 @@ import {
 import {useIntl} from "react-intl";
 import {ArrowBack, Edit} from "@mui/icons-material";
 import {mockIngredients, mockCuisines, mockDietarySpecifics} from "../../../app/constants/mockdata"
-import Cookies from "js-cookie";
 
 const defaultDishValue = {
     name: '',
@@ -46,19 +45,14 @@ const DishDetail = ({backPagePath, onFetchDishData, onCreateDish,
 
 
     useEffect(() => {
-        const sessionId = Cookies.get("SESSION-ID");
-        console.log(sessionId);
-        if (!sessionId) {
-            navigator("/login");
-        } else {
+
             if (Number(id)) {
                 getDish(id)
             } else {
                 setEditMode(true);
                 setLocalDish(defaultDishValue);
             }
-        }
-    }, []);
+    }, [isDishFetched]);
 
     const getDish = (dishId) => {
         if (!isDishFetched) {
@@ -109,7 +103,7 @@ const DishDetail = ({backPagePath, onFetchDishData, onCreateDish,
 
                         setEditMode(false);
 
-                        setLocalDish(defaultDishValue);
+                        setIsDishFetched(false)
                         console.log("Update success");
                     })
                     .catch(() => {

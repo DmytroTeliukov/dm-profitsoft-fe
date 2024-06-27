@@ -95,7 +95,7 @@ function Header({
   const isMobile = useIsMobile();
   const langsMenuRef = useRef(null);
   const locationSearch = useLocationSearch();
-  const user = useSelector(({ user: reducerUser }) => reducerUser);
+  const {user, isAuthorized} = useSelector((user) => (user));
   const userMenuRef = useRef(null);
 
   const [state, setState] = useState({
@@ -106,7 +106,7 @@ function Header({
 
   const actualOrderedRightPanelItemTypes = useMemo(() => {
     const result = [];
-    if (user.isAuthorized) {
+    if (user) {
       result.push(rightPanelItemTypes.USER_NAME);
     } else if (
       !user.isFetchingUser
@@ -131,12 +131,12 @@ function Header({
           <LeftNavBar />
           <Link
             to={{
-              pathname: `${pagesURLs[pages.defaultPage]}`,
+              pathname: `${pagesURLs[pages.menuPage]}`,
             }}
           >
             <Hover
               light
-              selected={currentPage === pages.defaultPage}
+              selected={currentPage === pages.menuPage}
             >
               <div className={classes.hover}>
                 <Logo compact={isMobile} />
@@ -149,15 +149,15 @@ function Header({
             <>
               {itemType === rightPanelItemTypes.USER_NAME && (
                 <div ref={userMenuRef}>
-                  <Hover
-                    light
-                    onClick={() => setState({
-                      ...state,
-                      isUserMenuOpened: true,
-                    })}
-                    selected={state.isUserMenuOpened}
-                  >
-                    <div className={classes.hover}>
+                    <Link
+                        to={{
+                            pathname: `${pagesURLs[pages.profilePage]}`,
+                        }}
+                    >
+                        <Button
+                            colorVariant="header"
+                            variant="text"
+                        >
                       <div
                         className={isMobile ? classes.userNameMobile : ''}
                       >
@@ -166,11 +166,11 @@ function Header({
                           noWrap
                           variant="subtitle"
                         >
-
+                            {user.name}
                         </Typography>
                       </div>
-                    </div>
-                  </Hover>
+                    </Button>
+                    </Link>
                 </div>
               )}
               {itemType === rightPanelItemTypes.LOGIN && (
