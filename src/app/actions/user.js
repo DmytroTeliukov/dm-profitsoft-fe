@@ -36,7 +36,6 @@ const signIn = () => {
     BACK_END_SERVICE,
   } = config;
   window.location.href = `${BACK_END_SERVICE}/oauth/authenticate`;
-  return axios.get(`${BACK_END_SERVICE}/oauth/authenticate`);
 };
 
 const fetchSignIn = () => (dispatch) => {
